@@ -1,0 +1,12 @@
+[Unit]
+Description=Mirror authoritative node Capability Mesh state to a non-voting fallback
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=jason
+Environment=CAPMESH_ENV_FILE=CAPMESH_STATE_DIR/capmesh.env
+ExecStart=CAPMESH_STATE_DIR/current/ops/sync-nonvoting-member.sh
+Nice=10
+IOSchedulingClass=idle

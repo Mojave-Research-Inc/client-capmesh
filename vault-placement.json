@@ -1,0 +1,2399 @@
+{
+ "version": 1,
+ "source": "capmesh-vault-triage full classification (resume of wf_1c69b789)",
+ "_design": "Entries are matched by NORMALIZED key 'type/basename@version', NOT by exact uri. governance._vault_match_key() strips the leading '<plugin>.' prefix on both sides, so the 'global.' prefixes below are illustrative \u2014 a cap matches regardless of which plugin namespace currently owns it (drift-tolerant by design). Do NOT 'fix' these to exact live URIs; that would re-break placement (exact match = 0 hits). A few entries name caps not currently in the live source \u2014 they are harmless no-ops. High-sensitivity caps are intentionally excluded (kept private).",
+ "placements": [
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.agent-registry-keeper@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.agile-delivery-lead@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ai-cogs-analyst@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ai-compliance-auditor@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ai-incident-commander@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.approval-authority-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.audit-coordinator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.billing-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.board-pack-curator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.board-secretary@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.capability-taxonomist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.capture-strategist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.cash-forecast-analyst@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ceo-strategy-operator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.cfo-value-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.chief-of-staff@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.citation-verification-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.clause-compliance-analyzer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.cmmc-program-manager@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.cmo-brand-demand-commander@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.cohort-analyst@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.common-paymaster-analyst@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.comms-strategist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.comp-analyst@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.competitive-intelligence-analyst@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.compliance-doc-builder@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.compliance-evidence-assembler@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.compliance-impact-analyzer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.consolidation-controller@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.contract-drafter@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.contract-guardian@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.controller@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.coo-operating-system-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.cro-sales-motion-builder@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.cross-entity-risk-reviewer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.customer-ops-workflow-designer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.customer-success-revenue-retention-lead@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.data-insights-translator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.dcaa-compliance-auditor@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.deal-desk-reviewer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.delivery-orchestrator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.delivery-sentinel@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.diagram-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.document-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.editorial-director@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.engagement-letter-writer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.engineering-manager-copilot@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.entity-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.entity-relationship-cartographer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.faq-writer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.finance-ops-controller@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.financial-scenario-modeler@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.flow-down-compliance-checker@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.forecast-analyst@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.fpa-modeler@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.gc-risk-and-contracts-counsel@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.govcon-controller@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.governance-documenter@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.governance-guardian@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.gpu-capacity-planner@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.indirect-rate-planner@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.instructional-designer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.insurance-broker-liaison@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.lean-product-coach@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.linear-operator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.local-runtime-sre@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.market-intelligence-analyst@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.mcp-security-gatekeeper@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.negotiation-hotwash-reviewer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.network-cloud-analyst@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.onchain-investigation-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.openbao-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.openbao-migration-pilot@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.operating-model-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.org-change-manager@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.partnerships-alliances-operator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.people-culture-operator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.people-ops-coordinator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.policy-drafter@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.portfolio-strategy-synthesizer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.presentation-producer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.pricing-strategist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.pricing-strategist-commercial@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.process-designer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.program-director-agent@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.program-manager@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.proposal-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.proposal-compliance-reviewer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.qbr-preparer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.quality-verifier@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.regulatory-watchdog@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.resource-optimizer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.revenue-accountant@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.revenue-ops-automator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.risk-officer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.saas-metrics-narrator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.scope-to-sow-translator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.secure-build-reviewer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.security-boundary-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.semantic-router-librarian@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.shared-services-designer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.slide-builder@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.solution-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.sop-author@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.standards-development-coordinator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.strategic-planner@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.tax-reviewer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.tax-strategist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.teaming-network-manager@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.timekeeping-auditor@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-audit-compliance-officer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-cost-optimizer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-derp-engineer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-funnel-engineer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-grants-policy-engineer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-identity-engineer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-kubernetes-operator-engineer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-migration-strategist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-multi-tailnet-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-network-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-orchestrator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-posture-officer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-routing-engineer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-services-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-ssh-engineer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-tailnet-lock-officer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.vendor-ops-manager@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.vision-execution-translator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.vision-partner@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.vision-quality-assessor@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.visual-design-director@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.13wk-forecast@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.agent-inventory@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.ai-cogs-allocation@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.ai-gpu-plan@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.ai-incident@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.ai-margin-walk@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.foundation-member@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.foundation-standard@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.artifact-sweep@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.audit-prep@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.battlecard@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.board-pack@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.board-package@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.board-risk@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.capture-plan@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.cash-dashboard@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.client-health@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.close-checklist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.cloud-audit-pull@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.coa-design@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.cohort-build@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.cohort-ltv-cac@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.cohort-narrative@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.comp-band-update@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.compliance-calendar@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.compliance-suite@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.consolidate@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.contract-intake@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.cost-proposal@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.crisis-comms@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.data-room-build@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.entity-map@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.entity-strategy@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.equity-refresh@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.eu-ai-act-readiness@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.evm-report@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.exec-bulletin@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.flow-down-check@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.fpa-build-model@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.fpa-reforecast@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.fpa-scenario@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.fpa-variance@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.growth-strategy@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.headcount-plan@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.ingest-all@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.insurance-renewal@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.intercompany-review@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.investor-financial-package@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.investor-model-build@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.investor-model-export@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.investor-model-refresh@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.investor-update@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.ip-audit@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.license-copyleft-check@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.license-scan@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.make-dashboard@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.mal-sigma@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.mal-yara@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.management-report@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.obligation-tracker@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.okr-cascade@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.onboard@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.one-pager@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.opportunity-score@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.press-release@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.pricing-deal-review@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.pricing-design@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.pricing-wtp-study@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.process-intake@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.program-status@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.ptw@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.qbr@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.qsbs-check@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.qsbs-eligibility@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.qualify-partner@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.raft-operator-quick-reference@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.rate-card@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.reg-impact@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.reg-radar@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.renewal-brief@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.resolution@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.resource-plan@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.risk-register@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.sca-audit@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.scenario-model@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.sim-bin2src@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.sim-scan@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.sim-triangulate@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.sla-status@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.strategy-brief@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.sub-performance@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.tax-rd-credit@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.timesheet-audit@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.ts-audit@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.ts-design-session@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.ts-specialists@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.venture-debt-eval@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.win-themes@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.workforce-plan@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.workpapers@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/mcp_server/asgcode-build@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/mcp_server/small-business.small-business-mcp@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/agent-governance.agent-governance@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/client-delivery.client-delivery@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/communications.communications@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/contract-lifecycle.contract-lifecycle@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/delivery-pmo-and-sops.delivery-pmo-and-sops@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/document-forge.document-forge@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/external-docs.external-docs@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/internal-docs.internal-docs@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/operating-model.operating-model@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/program-management.program-management@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/regulatory-radar.regulatory-radar@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/small-business.small-business@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/strategic-planning.strategic-planning@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/subcontractor-network.subcontractor-network@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/training-and-visuals.training-and-visuals@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/visual-intelligence.visual-intelligence@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-accounting-and-close.cfo-accounting-and-close@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-ai-econ.cfo-ai-unit-economics@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-ai-unit-economics.cfo-ai-unit-economics@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-board.cfo-board-and-investor-governance@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-board-and-investor-governance.cfo-board-and-investor-governance@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-cash.cfo-treasury-and-cash@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-close.cfo-accounting-and-close@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-cohort.cfo-cohort-and-saas-analytics@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-cohort-and-saas-analytics.cfo-cohort-and-saas-analytics@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-commercial-pricing.cfo-commercial-pricing@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-fpa.cfo-fpa-driver-model@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-fpa-driver-model.cfo-fpa-driver-model@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-headcount.cfo-headcount-comp-equity@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-headcount-comp-equity.cfo-headcount-comp-equity@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-investor.cfo-investor-financial-model@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-investor-financial-model.cfo-investor-financial-model@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-price.cfo-commercial-pricing@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-qtc.cfo-quote-to-cash@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-quote-to-cash.cfo-quote-to-cash@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-risk.cfo-risk-insurance-compliance@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-risk-insurance-compliance.cfo-risk-insurance-compliance@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-tax.cfo-tax-commercial@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-tax-commercial.cfo-tax-commercial@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cfo-treasury-and-cash.cfo-treasury-and-cash@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/compass-suite.compass-suite@1.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/eos-visionary-plugin.eos-visionary-plugin@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/executive-gtm-operators-2026.executive-gtm-operators-2026@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/linear-integration.linear-integration@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/openbao-engineer.openbao-engineer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/resend-skills.resend-skills@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/tailscale-specialists-2026.tailscale-specialists-2026@1.0.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/vossian.vossian@0.3.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.accounting-system-builder@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.analyzing-competitive-pricing@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.analyzing-market-intelligence@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.architecting-ip-licenses@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.assembling-board-packages@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.assessing-regulatory-impact@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.assessing-supply-chain-risk@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.assessing-vision-quality@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.auditing-ai-compliance@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.auditing-contract-performance@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.auditing-intercompany-alignment@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.authoring-data-classification-guides@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.authoring-sops@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.authoring-timekeeping-sops@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.automating-status-reports@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.benchmarking-intercompany-arrangements@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-foundation-content@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-capability-statements@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-capture-plans@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-client-lifecycle-swimlanes@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-client-scorecards@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-cmmc-gap-to-poam-roadmaps@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-compliance-documentation-suites@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-compliance-matrices@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-controller-qc-checklists@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-corporate-formalities-checklists@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-cost-proposals@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-delegation-of-authority-matrices@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-eos-vision@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-evidence-binders@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-executive-presentations@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-indirect-rate-workbooks@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-ip-registries@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-management-reports@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-month-end-close-playbooks@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-capability-statements@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-performance-frameworks@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-program-plans@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-proposal-graphics@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-qbr-decks@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-retainer-qbrs@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-role-cards@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-service-catalogs@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-session-briefs@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-signatory-matrices@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-ssp-and-boundary-packs@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-teaming-strategies@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-audit-engagement-letters@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-training-modules@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-vendor-ddqs@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-weekly-portfolio-briefings@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.capturing-decision-logs@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.capturing-visionary-input@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.cascading-okrs@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.cataloging-capabilities@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.classifying-direct-vs-indirect-costs@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.classifying-matter-intake@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.classifying-workers@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.cmmc-intake-engine@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.cmmc-rpo-operations@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.cmmc-sales-engine@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.cmmc-web-forge@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.communicating-entity-roles-internally@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.communicating-intercompany-structure-to-staff@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.comparing-vision-versions@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-cap-table-modeler@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-competitive-moat-analyzer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-data-room-builder@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-deal-structurer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-due-diligence-prepper@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-exit-strategist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-financial-modeler@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-fundraise-operator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-growth-accelerator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-investor-relations@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-investor-targeter@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-legal-compliance@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-market-intelligence@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-narrative-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-non-dilutive-navigator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-pitchdeck-creator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-qa-wargamer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compass-valuation-strategist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.competitive-intelligence-tracking@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.competitive-positioning-analysis@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.compliance-timeline-management@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.conducting-delivery-retrospectives@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.consolidating-erp-group-financials@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.contract-review-anthropic@2026.01.30",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.converting-policy-to-checklists@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.converting-policy-to-training@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.coordinating-subsidiary-services@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.accessibility-qa-lead@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.agentic-sdlc-orchestrator@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.api-contract-engineer@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.brand-systems-strategist@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ci-cd-release-captain@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.cloud-finops-optimizer@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.codebase-modernizer@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.completion-engineer@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.completion-mandate-enforcer@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.context-engineering-architect@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.decision-log-chief@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.design-system-governor@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.developer-experience-engineer@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.dialectical-examiner@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.evals-observability-lead@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.first-principles-analyst@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.intuitive-commanding-ux-director@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.mvp-forge-lead@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.opus-architecture-intelligence-lead@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.performance-engineer@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.platform-golden-path-engineer@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.pmbok-advisor@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.practical-reasoner@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.process-mining-analyst@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.procurement-and-vendor-operator@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.product-discovery-lead@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.roadmap-artist@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.roadmap-strategist@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.sales-tax-nexus-analyst@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.sre-incident-commander@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.staff-architecture-partner@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.supply-chain-provenance-auditor@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.svelte-file-editor@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.task-extractor@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.task-validator@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.test-strategy-engineer@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-troubleshooter@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ts-tsnet-developer@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ux-flow-architect@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.agentic-sdlc@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.alias@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.analyze-cohorts@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.analyze-feedback@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.analyze-test@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.brainstorm@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.build-agent@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.build-mcp@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.business-model@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.competitive-analysis@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.derive-tests@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.discover@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.document-app@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.draft-nda@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.extract-tasks@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.generate-data@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.interview@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.intuitive-commanding-ux@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.make-deck@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.make-diagram@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.market-product@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.market-scan@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.meeting-notes@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.model-select@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.north-star@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.opus-architecture-audit@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.password-gen@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.performance-audit-static@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.plan-launch@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.plan-okrs@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.pre-mortem@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.pricing@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.privacy-policy@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.proofread@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.red-team-prd@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.research-users@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.review-resume@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.sales-tax-nexus@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.security-audit-static@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.setup-metrics@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.ship-check@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.sprint@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.stakeholder-map@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.strategy@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.tailor-resume@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.test-scenarios@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.transform-roadmap@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.triage-requests@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.value-proposition@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.vibe-complete@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.write-prd@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.write-query@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/command/global.write-stories@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/mcp_server/resend-skills.resend-skills-mcp@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/mcp_server/svelte.svelte-mcp@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/agentic-flow-specialists-2026.agentic-flow-specialists-2026@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/agentic-sdlc-2026.agentic-sdlc-2026@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/aristotelian-first-principles.aristotelian-first-principles@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/asgcode-completion.asgcode-completion@1.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/cloudflare-skills.cloudflare-skills@1.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/general-agile-pm.general-agile-pm@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/lean-product-specialist.lean-product-specialist@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/pm-ai-shipping.pm-ai-shipping@2.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/pm-data-analytics.pm-data-analytics@2.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/pm-execution.pm-execution@2.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/pm-go-to-market.pm-go-to-market@2.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/pm-market-research.pm-market-research@2.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/pm-marketing-growth.pm-marketing-growth@2.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/pm-product-discovery.pm-product-discovery@2.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/pm-product-strategy.pm-product-strategy@2.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/pm-toolkit.pm-toolkit@2.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/pmp-pmbok-guide.pmp-pmbok-guide@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/roadmap-frameworks.roadmap-frameworks@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/svelte.svelte@1.0.4",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/task-intelligence.task-intelligence@1.0.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/plugin/vibe-mandates-2026.vibe-mandates-2026@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.accusation-audit@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.ackerman@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.anchor-extreme@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.anti-slop-voice-discipline@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.apex-checklist@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.apex-knowledge@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.apex-protocol@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.arcgis-pipeline-dev@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.backend-forge@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.bcsm@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.bend-reality@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.black-swan-hunter@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.black-swan-integrated@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.black-swan-recon@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.black-swan-triggers@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.brand-sigil@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.budget-categorization@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-dependency-registers@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-entity-relationship-diagrams@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.building-law-firm-ai-policies@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.calibrate@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.caviaar-prep@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.checking-ai-code-hardening@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.claude-md-orchestrator@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.core-data-expert@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.install-titrate@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/skill/global.operating-qwen-inference-fleet@0.1.0",
+   "vault": "all"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.ai-code-auditor@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.api-contracts@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.api-migration-agent@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.appsec-reviewer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.architecture-design-opus@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.architecture-design@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.backend-implementer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.large-model-specialist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.checklist-sentinel@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.cicd-engineer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.claude-system-optimizer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.cloud-cost-guardian@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.code-critic-verifier@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.code-refactoring-optimizer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.code-reviewer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.codebase-health-monitor@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.codex-specialist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.compliance-license@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.context-synthesizer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.data-privacy-governance@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.data-schema-designer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.database-migration@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.dependency-upgrader@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.devex-build@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.docs-changelog@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.docs-writer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.docsmith-technical-writer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.edge-computing-optimizer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.error-detective@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.frontend-implementer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.general-purpose@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.haiku-knowledge-steward@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.iac-platform@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.incident-commander@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.incident-responder@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.issue-to-pr-solver@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.issue-triage-pr-reviewer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.license-compliance-analyst@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.llm-safety-prompt-eval@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.mcp-server-manager@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.observability-monitoring@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.observability-telemetry@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.open-source-scout-integrator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.openhands-cost-guard@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.openhands-dispatcher@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.openhands-executor@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.openhands-reviewer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.orchestrator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.perf-reliability@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.performance-reliability@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.planner-decomposer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.planner@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.playwright-bridge-operator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.playwright-bridge@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.podman-container-builder@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.product-spec-writer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.production-readiness-checker@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.project-auditor@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.python-uv-specialist@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.quantum-ready-dev@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.qwen-builder@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.rag-knowledge-indexer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.reasoning-classifier@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.refactorer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.release-manager@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.research@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.resource-guardian@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.scorecard-analyst@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.secrets-iam-guard@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.security-architect@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.security-auditor@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.security-autofix-guardian@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.security-threat-modeler@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.syntax-validator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.task-loop-steward@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.task-sentinel@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.test-author@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.test-automator@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.test-engineer@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.test-runner@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.testgen-mutation@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.visual-iteration@0.1.0",
+   "vault": "org"
+  },
+  {
+   "uri": "cap://user/asg/idn_<your-identity>/private/personal/agent/global.workflow-orchestrator@0.1.0",
+   "vault": "org"
+  }
+ ]
+}

@@ -1,0 +1,170 @@
+{
+  "thresholds": {
+    "recallAtK": 0.9,
+    "mrrAtK": 0.65,
+    "ndcgAtK": 0.72,
+    "criticalRecallAtK": 1.0
+  },
+  "cases": [
+    {
+      "query": "harden our MCP gateway against prompt injection and tool poisoning",
+      "expectedAny": ["mcp-security-gatekeeper"],
+      "type": "agent",
+      "critical": true
+    },
+    {
+      "query": "design HA Raft topology and the seal model for a secrets store",
+      "expectedAny": ["openbao-architect"],
+      "type": "agent",
+      "critical": true
+    },
+    {
+      "query": "run an SRE incident response and restore a production service",
+      "expectedAny": ["sre-incident-commander", "local-runtime-sre"],
+      "type": "agent",
+      "critical": true
+    },
+    {
+      "query": "review my pull request for correctness style and security issues",
+      "expectedAny": ["code-reviewer", "pr-test-analyzer"],
+      "type": "agent",
+      "critical": true
+    },
+    {
+      "query": "verify a TypeScript app built on the Agent SDK is wired correctly",
+      "expectedAny": ["agent-sdk-verifier-ts"],
+      "type": "agent"
+    },
+    {
+      "query": "verify a Python Agent SDK application end to end",
+      "expectedAny": ["agent-sdk-verifier-py"],
+      "type": "agent"
+    },
+    {
+      "query": "find silent bugs that fail without throwing in our codebase",
+      "expectedAny": ["silent-failure-hunter"],
+      "type": "agent",
+      "critical": true
+    },
+    {
+      "query": "audit our software supply chain provenance and SBOM evidence",
+      "expectedAny": ["supply-chain-provenance-auditor"],
+      "type": "agent"
+    },
+    {
+      "query": "run FinOps cloud cost optimization and right-size spend",
+      "expectedAny": ["cloud-finops-optimizer"],
+      "type": "agent"
+    },
+    {
+      "query": "mine the business rules and validation logic out of a legacy module",
+      "expectedAny": ["business-rules-extractor"],
+      "type": "agent"
+    },
+    {
+      "query": "define the design system tokens and component governance",
+      "expectedAny": ["design-system-governor"],
+      "type": "agent"
+    },
+    {
+      "query": "map the user journey and interaction flow for a new feature",
+      "expectedAny": ["ux-flow-architect"],
+      "type": "agent"
+    },
+    {
+      "query": "orchestrate the secure 2026 agentic software delivery workflow",
+      "expectedAny": ["agentic-sdlc-orchestrator", "delivery-orchestrator"],
+      "type": "agent"
+    },
+    {
+      "query": "plan interviews and write a PRD for a new product idea",
+      "expectedAny": ["product-discovery-lead"],
+      "type": "agent"
+    },
+    {
+      "query": "analyze performance and optimize hot paths in a service",
+      "expectedAny": ["performance-engineer"],
+      "type": "agent"
+    },
+    {
+      "query": "keep the decision log and write board memos for leadership",
+      "expectedAny": ["decision-log-chief"],
+      "type": "agent"
+    },
+    {
+      "query": "respond to an OpenBao vault incident and recover seal state",
+      "expectedAny": ["openbao-incident-responder"],
+      "type": "agent"
+    },
+    {
+      "query": "review OpenBao policies and audit device template hardening",
+      "expectedAny": ["openbao-policy-reviewer"],
+      "type": "agent"
+    },
+    {
+      "query": "pilot a migration off one vault backend onto OpenBao",
+      "expectedAny": ["openbao-migration-pilot"],
+      "type": "agent"
+    },
+    {
+      "query": "critique a proposed target architecture against modularity and coupling",
+      "expectedAny": ["architecture-critic", "staff-architecture-partner"],
+      "type": "agent"
+    },
+    {
+      "query": "design API contracts with versioning errors and idempotency",
+      "expectedAny": ["api-contract-engineer"],
+      "type": "agent"
+    },
+    {
+      "query": "build a golden path template so devs ship the safe default",
+      "expectedAny": ["platform-golden-path-engineer"],
+      "type": "agent"
+    },
+    {
+      "query": "run the release and cut a CI/CD deployment safely",
+      "expectedAny": ["ci-cd-release-captain"],
+      "type": "agent"
+    },
+    {
+      "query": "simplify and refactor code without changing behavior",
+      "expectedAny": ["code-simplifier"],
+      "type": "agent"
+    },
+    {
+      "query": "explore an unfamiliar codebase and map its structure",
+      "expectedAny": ["code-explorer", "code-architect"],
+      "type": "agent"
+    },
+    {
+      "query": "analyze a conversation transcript for intent and next steps",
+      "expectedAny": ["conversation-analyzer"],
+      "type": "agent"
+    },
+    {
+      "query": "design the eval harness and observability for agent quality",
+      "expectedAny": ["evals-observability-lead"],
+      "type": "agent"
+    },
+    {
+      "query": "rotate and operate Proton Pass credentials for the team",
+      "expectedAny": ["proton-pass-operator"],
+      "type": "agent"
+    },
+    {
+      "query": "analyze static types and catch type-design regressions",
+      "expectedAny": ["type-design-analyzer"],
+      "type": "agent"
+    },
+    {
+      "query": "design the onboarding success and escalation workflow for customers",
+      "expectedAny": ["customer-ops-workflow-designer"],
+      "type": "agent"
+    },
+    {
+      "query": "analyze comments and docstrings for staleness and quality",
+      "expectedAny": ["comment-analyzer"],
+      "type": "agent"
+    }
+  ]
+}

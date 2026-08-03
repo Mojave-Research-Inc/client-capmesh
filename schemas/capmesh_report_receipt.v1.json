@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "asgcode://schemas/capmesh_report_receipt.v1.json",
+  "title": "CapMesh Report Receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "authoritative", "event", "taskId", "agentUri", "bundleDigest",
+    "capabilityBindingDigest", "outcomeDigest", "outcomeStatus", "workflowId",
+    "repo", "worktree", "baseCommit", "upstreamDelegationId", "reportId",
+    "acceptedAt", "provenance", "issued_at", "expires_at", "nonce", "key_id",
+    "signature"
+  ],
+  "properties": {
+    "schema": {"const": "capmesh.report.receipt.v1"},
+    "authoritative": {"const": true},
+    "event": {"const": "asgcode.workflow.stage"},
+    "taskId": {"type": "string", "pattern": "^cap-task-[a-f0-9]{32}$"},
+    "agentUri": {"type": "string", "pattern": "^cap://"},
+    "bundleDigest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "capabilityBindingDigest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "outcomeDigest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "outcomeStatus": {"enum": ["OK", "NEED_HELP", "BLOCKED", "FAILED_VERIFY", "INFRA_DOWN", "POLICY_DENIED"]},
+    "workflowId": {"type": "string", "minLength": 1},
+    "repo": {"type": "string", "minLength": 1},
+    "worktree": {"type": "string"},
+    "baseCommit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "upstreamDelegationId": {"type": "string"},
+    "reportId": {"type": "string", "pattern": "^cap-report-[a-f0-9]{32}$"},
+    "acceptedAt": {"type": "string", "minLength": 1},
+    "provenance": {"const": "https://capmesh.asg.ts.net/tools/call#cap.report"},
+    "issued_at": {"type": "integer", "minimum": 0},
+    "expires_at": {"type": "integer", "minimum": 1},
+    "nonce": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]{8,160}$"},
+    "key_id": {"type": "string", "pattern": "^ed25519:sha256:[a-f0-9]{64}$"},
+    "signature": {"type": "string", "pattern": "^[A-Za-z0-9_-]{86}$"}
+  }
+}

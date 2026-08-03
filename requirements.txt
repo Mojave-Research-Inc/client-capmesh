@@ -1,0 +1,8 @@
+sqlite-vec==0.1.9
+# Internal Ed25519 capability provenance attestations.
+cryptography==49.0.0
+# id_token signature verification for the M365 OAuth completion path (F-03).
+PyJWT[crypto]==2.13.0
+# Google OIDC sign-in path (auth_google.py) — official SDKs, no hand-rolled JWT.
+google-auth==2.55.1
+google-auth-oauthlib==1.4.0

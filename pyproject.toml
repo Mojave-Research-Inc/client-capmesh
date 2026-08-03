@@ -1,0 +1,47 @@
+[project]
+name = "client-capmesh"
+version = "0.1.0"
+description = "Client Capability Mesh — baseline capability router for customer distribution"
+requires-python = ">=3.12"
+dependencies = [
+    "cryptography>=49.0.0,<50",
+    "sqlite-vec>=0.1.0a4",
+    "PyJWT[crypto]>=2.13.0,<3",
+    "google-auth>=2.55.1,<3",
+    "google-auth-oauthlib>=1.4.0,<2",
+]
+
+[project.optional-dependencies]
+vector = ["sqlite-vec>=0.1.0a4"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2,<10",
+]
+
+[project.scripts]
+capmesh = "capmesh.cli:main"
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["capmesh*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["SIM117", "PLW1510", "PYI034"]
+"tests/test_capmesh_soak.py" = ["EXE001", "BLE001"]
+"capmesh/migrations.py" = ["BLE001"]
+"capmesh/task_runner.py" = ["BLE001"]
+"capmesh/break_glass.py" = ["DTZ003", "DTZ005"]
+"capmesh/index.py" = ["SIM118"]
+"capmesh/local_embedding.py" = ["BLE001"]
+"capmesh/scim_sync.py" = ["BLE001"]

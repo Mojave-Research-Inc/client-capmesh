@@ -1,0 +1,39 @@
+{
+  "database": "~/.capmesh/asg-capmesh.db",
+  "roots": [
+    "<CAPMESH_ROOTS>/plugins",
+    "~/.capmesh/skill-registry",
+    "~/.capmesh/skills",
+    "~/.capmesh/plugins/cache",
+    "~/.capmesh/plugins/cache/personal"
+  ],
+  "authorization": {
+    "stdioDefaultPrincipal": {
+      "subject": "admin@example.com",
+      "groups": ["local"],
+      "roles": ["platform_admin"],
+      "scopes": ["cap:*"]
+    },
+    "remoteHttp": {
+      "status": "tailnet-only",
+      "baseUrl": "<CAPMESH_BASE_URL>/capmesh",
+      "bindHost": "0.0.0.0",
+      "bindInterface": "tailscale0",
+      "requirements": [
+        "no public internet listener",
+        "systemd IPAddressDeny=any with localhost plus Tailscale CIDR allowlist",
+        "OAuth 2.1 Authorization Code + PKCE",
+        "Entra SCIM 2.0 provisioning under /scim/v2",
+        "RFC 8707 Resource Indicators",
+        "RFC 9728 Protected Resource Metadata",
+        "audience validation",
+        "no token passthrough"
+      ]
+    }
+  },
+  "index": {
+    "fts5": true,
+    "sqliteVec": "optional",
+    "embedding": "local deterministic lexical hash until production embedding provider is configured"
+  }
+}

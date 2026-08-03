@@ -1,0 +1,11 @@
+[Unit]
+Description=Keep non-voting Capability Mesh fallback synchronized with the authoritative node
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+RandomizedDelaySec=30
+Persistent=true
+
+[Install]
+WantedBy=timers.target
