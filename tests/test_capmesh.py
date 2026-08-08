@@ -290,7 +290,7 @@ class CapabilityMeshTests(unittest.TestCase):
             ("cap.search", "cap.load", "cap.call", "cap.list", "cap.describe", "cap.delegate", "cap.process", "cap.report"),
         )
 
-    def test_capguard_unchanged_upsert_performs_no_writes(self) -> None:
+    def test_capguard_prerelease_denial(self) -> None:
         cap = self.private_cap()
         changes_before = self.con.total_changes
 
