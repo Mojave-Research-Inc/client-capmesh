@@ -21,10 +21,10 @@ class TestMigrations(unittest.TestCase):
             init_db(con)  # Creates all tables and runs migrations
             status = migration_status(con)
             self.assertTrue(status["upToDate"])
-            self.assertEqual(status["currentVersion"], 2)
+            self.assertEqual(status["currentVersion"], 3)
             status = migration_status(con)
             self.assertTrue(status["upToDate"])
-            self.assertEqual(status["currentVersion"], 2)
+            self.assertEqual(status["currentVersion"], 3)
             con.close()
 
     def test_migration_runner_idempotent(self) -> None:
