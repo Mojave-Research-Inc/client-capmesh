@@ -318,6 +318,66 @@ class McpSecurityReadinessTests(unittest.TestCase):
         )
         self.assertFalse(metrics_token_matches("", service_token="svc-token", metrics_token=None))
 
+    def test_readiness_schema_version_check_passes_after_migration(self) -> None:
+        # Regression guard: CapGuard added migration v3 but left the
+        # SCHEMA_VERSION constant at 2, so readiness rejected a correctly
+        # migrated database (schemaVersion ok=False, actual=3, expected=2,
+        # overall status 503). After init_db the DB is at the migration
+        # runner's head version; the readiness schemaVersion check must be ok
+        # and must report actual == expected == SCHEMA_VERSION. Readiness must
+        # stay fail-closed: a hand-rolled drift (DB below the constant) must
+        # flip the check back to not-ok.
+        from capmesh.index import SCHEMA_VERSION
+
+        schema_row = self.con.execute(
+            "SELECT value FROM meta WHERE key = 'schema_version'"
+        ).fetchone()
+        self.assertEqual(int(schema_row[0]), SCHEMA_VERSION)
+
+        self.con.execute(
+            "INSERT OR REPLACE INTO meta(key,value) VALUES('last_successful_ingest_at', datetime('now'))"
+        )
+        self.con.execute(
+            "INSERT OR REPLACE INTO meta(key,value) VALUES"
+            "('last_successful_ingest_generation', 'sha256:' || printf('%064d', 1))"
+        )
+        self.con.commit()
+        with patch.dict(
+            os.environ,
+            {
+                "CAPMESH_READY_MIN_CAPABILITIES": "1",
+                "CAPMESH_READY_MIN_SOURCES": "0",
+                "CAPMESH_READY_MAX_AGE_SECONDS": "3600",
+                "CAPMESH_AUTHORITY_URL": "https://capmesh.example.com",
+            },
+            clear=False,
+        ):
+            payload, status = readiness_payload(self.con, started_at=time.monotonic())
+            schema_check = next(
+                item for item in payload["checks"] if item["name"] == "schemaVersion"
+            )
+            self.assertTrue(schema_check["ok"], schema_check)
+            self.assertEqual(schema_check["actual"], SCHEMA_VERSION)
+            self.assertEqual(schema_check["expected"], SCHEMA_VERSION)
+            self.assertNotEqual(status, 503)
+
+            # Fail-closed: roll the DB back below the published constant and
+            # confirm the schemaVersion check flips to not-ok and readiness
+            # refuses to serve. The check must not be a constant-returns-true.
+            self.con.execute(
+                "INSERT OR REPLACE INTO meta(key,value) VALUES('schema_version', ?)",
+                (str(SCHEMA_VERSION - 1),),
+            )
+            self.con.commit()
+            payload, status = readiness_payload(self.con, started_at=time.monotonic())
+            schema_check = next(
+                item for item in payload["checks"] if item["name"] == "schemaVersion"
+            )
+            self.assertFalse(schema_check["ok"], schema_check)
+            self.assertEqual(schema_check["actual"], SCHEMA_VERSION - 1)
+            self.assertEqual(schema_check["expected"], SCHEMA_VERSION)
+            self.assertEqual(status, 503)
+
     def test_readiness_is_semantic_and_vector_is_optional(self) -> None:
         self.con.execute(
             "INSERT OR REPLACE INTO meta(key,value) VALUES('last_successful_ingest_at', datetime('now'))"

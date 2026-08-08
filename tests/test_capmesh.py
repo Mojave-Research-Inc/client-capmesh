@@ -49,6 +49,7 @@ from capmesh.governance import (
     submit_promotion,
     verify_id_token,
 )
+from capmesh.capguard import list_quarantine, release_capability_from_quarantine
 from capmesh.help import bootstrap_payload, protected_resource_metadata
 from capmesh.index import (
     connect,
@@ -149,6 +150,13 @@ class CapabilityMeshTests(unittest.TestCase):
         self, objective: str, *, workflow: dict | None = None,
         files: list[str] | None = None,
     ) -> tuple[str, str, dict, str, str]:
+        # An authoritative delegation binds the live agent and skill the
+        # fixture ingested; both are held in CapGuard quarantine until an
+        # explicit signed release promotes them, so promote them here before
+        # resolving them through get_capability. This is post-release
+        # behavior, not an admission bypass: the demo capabilities must clear
+        # the real clean scan + signed release before they are callable.
+        self.release_quarantined_demo_capabilities()
         workflow = workflow or {
             "workflowId": "wf_capmesh_test_1234", "repo": "", "worktree": "", "baseCommit": "",
         }
@@ -251,13 +259,38 @@ class CapabilityMeshTests(unittest.TestCase):
         else:
             os.environ["CAPMESH_SUPERADMIN_ACTORS"] = self._previous_superadmin_actors
 
+    def release_quarantined_demo_capabilities(self) -> None:
+        """Authoritatively release every demo capability the fixture ingested.
+
+        CapGuard now quarantines newly-discovered capabilities before they are
+        indexed, so a held capability is neither discoverable through
+        ``cap.search`` nor resolvable through ``get_capability``/``cap.call``
+        until an explicit signed release promotes it. Tests that exercise
+        post-release behavior (delegation, report receipts, search/load, and
+        the superadmin auto-approval gate that validates the tenant catalog)
+        must opt into that release rather than assume immediate admission.
+
+        This helper runs the authoritative fail-closed path
+        (:func:`release_capability_from_quarantine`) for each demo capability
+        still held in quarantine: it re-reads the on-disk source, runs the
+        metadata prompt-injection scan, issues a signed scan attestation bound
+        to the quarantine row's content_hash, and promotes the capability out
+        of quarantine only when the signed chain verifies. It is idempotent --
+        already-released rows are skipped -- so it is safe to call from a
+        ``setUp``-fresh test or from a path invoked more than once.
+        """
+        for item in list_quarantine(self.con, tenant_id="asg", status="quarantined"):
+            release_capability_from_quarantine(
+                self.con, item["id"], tenant_id="asg", actor="test@asg",
+            )
+
     def test_fixed_tool_surface(self) -> None:
         self.assertEqual(
             TOOL_NAMES,
             ("cap.search", "cap.load", "cap.call", "cap.list", "cap.describe", "cap.delegate", "cap.process", "cap.report"),
         )
 
-    def test_unchanged_upsert_performs_no_writes(self) -> None:
+    def test_capguard_unchanged_upsert_performs_no_writes(self) -> None:
         cap = self.private_cap()
         changes_before = self.con.total_changes
 
@@ -328,6 +361,9 @@ class CapabilityMeshTests(unittest.TestCase):
         self.assertEqual(tuple(row), ("draft", "shared"))
 
     def test_search_then_load_skill(self) -> None:
+        # The write-brief skill is quarantined on ingest; promote it through
+        # the real signed release before asserting it is discoverable.
+        self.release_quarantined_demo_capabilities()
         found = self.router.call("cap.search", {"query": "executive brief", "type": "skill"})
         self.assertFalse(found["isError"])
         results = found["structuredContent"]["results"]
@@ -335,6 +371,40 @@ class CapabilityMeshTests(unittest.TestCase):
         loaded = self.router.call("cap.load", {"uri": results[0]["uri"], "detail": "entrypoint"})
         self.assertFalse(loaded["isError"])
         self.assertIn("Write Brief", loaded["structuredContent"]["content"])
+
+    def test_prerelease_capabilities_are_not_discoverable_or_callable(self) -> None:
+        # Explicit pre-release denial coverage: a newly-ingested capability is
+        # held in CapGuard quarantine until an explicit signed release promotes
+        # it. Before that release it is neither resolvable as a live capability
+        # nor discoverable through search, and cap.call on it is denied. This
+        # is the fail-closed admission contract the release helper above opts
+        # out of only where post-release behavior is under test.
+        held = list_quarantine(self.con, tenant_id="asg", status="quarantined")
+        self.assertGreater(len(held), 0)
+        skill_uri = next(
+            item["capabilityUri"] for item in held
+            if item["capabilityType"] == "skill" and item["name"] == "write-brief"
+        )
+        # A held capability does not resolve to a live Capability row.
+        self.assertIsNone(get_capability(self.con, skill_uri))
+        # A held capability does not surface in tenant search.
+        jason = Principal(
+            subject=DEFAULT_USER_SUBJECT, roles=("org_admin",), scopes=("cap:search",),
+        )
+        results = search(self.con, "executive brief", jason, k=10)
+        self.assertNotIn(skill_uri, [item.capability.uri for item in results])
+        # A held capability cannot be invoked through cap.call.
+        denied = self.router.call("cap.call", {"uri": skill_uri, "args": {}})
+        self.assertTrue(denied["isError"])
+        # Releasing promotes exactly the held capability: it now resolves and
+        # surfaces in search, confirming the denial was admission-gated rather
+        # than a permanent rejection.
+        self.release_quarantined_demo_capabilities()
+        self.assertIsNotNone(get_capability(self.con, skill_uri))
+        self.assertIn(
+            skill_uri,
+            [item.capability.uri for item in search(self.con, "executive brief", jason, k=10)],
+        )
 
     def test_retrieval_name_keys_handle_morphology_without_single_term_boosts(self) -> None:
         self.assertEqual(
@@ -893,7 +963,16 @@ class CapabilityMeshTests(unittest.TestCase):
         self.assertEqual(row["created_by"], DEFAULT_USER_SUBJECT)
         self.assertEqual(row["visibility"], "protected")
         self.assertEqual(row["discovery_mode"], "hidden")
-        self.assertEqual(row["approval_state"], "draft")
+        # A newly-ingested capability is held in CapGuard quarantine pending a
+        # signed release, so its admission state is 'pending' (not 'draft'):
+        # fail-closed admission defers approval until the clean scan + signed
+        # release promotes the capability out of quarantine.
+        self.assertEqual(row["approval_state"], "pending")
+
+        # The namespace/ownership assertions above are pre-release admission
+        # state; the search assertions below are post-release, so promote the
+        # held skill through the real signed release before resolving it.
+        self.release_quarantined_demo_capabilities()
 
         jason = Principal(subject=DEFAULT_USER_SUBJECT, roles=(), scopes=("cap:search", "cap:load"))
         bob = Principal(subject="bob@example.com", roles=(), scopes=("cap:search", "cap:load"))
@@ -1497,6 +1576,25 @@ class CapabilityMeshTests(unittest.TestCase):
             },
             clear=False,
         ):
+            # The superadmin auto-approval gate validates every capability in
+            # the tenant catalog, including the demo capabilities the fixture
+            # ingested. CapGuard holds them in quarantine until a signed
+            # release promotes them, so the gate cannot resolve them ("not
+            # found in the current tenant") and the install is refused.
+            # Promote them through the real signed release (under the test's
+            # patched signing key) before the gate runs, then return the
+            # released demo capabilities to the 'pending' admission state so
+            # approve_catalog's review_batch can re-review and fully verify
+            # them (the signed release only promotes lifecycle/approval_state
+            # to published; full signature/provenance/risk verification is the
+            # gate's job). The catalog must reach zero non-compliant rows.
+            self.release_quarantined_demo_capabilities()
+            self.con.execute(
+                "UPDATE capabilities SET approval_state='pending' "
+                "WHERE source_kind NOT IN ('system_capability','capmesh_draft') "
+                "AND approval_state='published'",
+            )
+            self.con.commit()
             result = self.router.call(
                 "cap.call",
                 {

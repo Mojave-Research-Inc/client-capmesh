@@ -14,6 +14,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from capmesh.capguard import (
+    get_quarantine,
+    list_quarantine,
+    release_capability_from_quarantine,
+)
 from capmesh.index import connect, init_db, rebuild_index
 from capmesh.router import CapabilityRouter
 
@@ -22,9 +27,18 @@ class RouterRequestIdTests(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
-        self.previous_state_dir = os.environ.get("CAPMESH_STATE_DIR")
-        self.addCleanup(self.restore_state_dir)
+        self._previous_env = {
+            "CAPMESH_STATE_DIR": os.environ.get("CAPMESH_STATE_DIR"),
+            "CAPMESH_ENVIRONMENT": os.environ.get("CAPMESH_ENVIRONMENT"),
+            "CAPMESH_SIGNING_KEY_FILE": os.environ.get("CAPMESH_SIGNING_KEY_FILE"),
+        }
+        self.addCleanup(self.restore_env)
         os.environ["CAPMESH_STATE_DIR"] = str(self.root / "state")
+        # The clean signed release path issues Ed25519 scan + release
+        # attestations; keep the signing anchor inside the temp state so the
+        # release is deterministic and never touches a production anchor.
+        os.environ["CAPMESH_ENVIRONMENT"] = "test"
+        os.environ["CAPMESH_SIGNING_KEY_FILE"] = str(self.root / "signing.pem")
         plugin = self.root / "plugins" / "demo-plugin"
         (plugin / ".claude-plugin").mkdir(parents=True)
         (plugin / "skills" / "write-brief").mkdir(parents=True)
@@ -46,11 +60,32 @@ class RouterRequestIdTests(unittest.TestCase):
         self.con.close()
         self.tmp.cleanup()
 
-    def restore_state_dir(self) -> None:
-        if self.previous_state_dir is None:
-            os.environ.pop("CAPMESH_STATE_DIR", None)
-        else:
-            os.environ["CAPMESH_STATE_DIR"] = self.previous_state_dir
+    def restore_env(self) -> None:
+        for key, value in self._previous_env.items():
+            if value is None:
+                os.environ.pop(key, None)
+            else:
+                os.environ[key] = value
+
+    def _release_fixture_skill(self) -> str:
+        """Promote the quarantined ``write-brief`` skill out of quarantine via
+        the authoritative fail-closed release path so the router can see it.
+
+        ``rebuild_index`` quarantines every genuinely-new capability before it is
+        searchable, so the fixture skill is held until a clean signed release
+        is performed. This releases on the signed scan attestation (the client
+        path: no authority Capability, which is fail-closed by construction via
+        ``scan_clean_attestation``) without bypassing quarantine.
+        """
+        quarantined = list_quarantine(self.con, tenant_id="asg", status="quarantined")
+        skill = next(
+            item for item in quarantined if item["capabilityType"] == "skill"
+            and item["name"] == "write-brief"
+        )
+        released = release_capability_from_quarantine(
+            self.con, skill["id"], tenant_id="asg", actor="op@asg",
+        )
+        return released["status"]
 
     def test_request_id_from_header(self) -> None:
         """A request-id passed via the ``request_id`` kwarg is carried into the log line."""
@@ -91,9 +126,33 @@ class RouterRequestIdTests(unittest.TestCase):
         self.assertTrue(hasattr(record, "tenant"))
 
     def test_dispatch_result_unchanged(self) -> None:
-        """The dispatch still returns the same result with logging enabled (no behaviour change)."""
-        # Suppress the structured log so it does not pollute test output; the
-        # result contract is what we assert here, not the log.
+        """The dispatch result contract is unchanged once the fixture cap is released.
+
+        ``rebuild_index`` quarantines the fixture skill, so a search returns no
+        results until the capability is promoted via a clean signed release. The
+        pre-release denial asserts the capability is held (no quarantine bypass);
+        the post-release dispatch then asserts the same result contract the
+        router always returned once the capability is searchable.
+        """
+        # Pre-release denial: the quarantined fixture skill is NOT searchable.
+        quarantined = list_quarantine(self.con, tenant_id="asg", status="quarantined")
+        skill = next(
+            item for item in quarantined if item["capabilityType"] == "skill"
+            and item["name"] == "write-brief"
+        )
+        self.assertEqual(get_quarantine(self.con, skill["id"], tenant_id="asg")["status"], "quarantined")
+        with self.assertLogs("capMesh.router", level="INFO"):
+            held = self.router.call("cap.search", {"query": "executive brief", "type": "skill"})
+        self.assertFalse(held["isError"])
+        self.assertEqual(len(held["structuredContent"]["results"]), 0)
+
+        # Clean signed release: promote the fixture skill out of quarantine
+        # through the authoritative fail-closed release path.
+        self.assertEqual(self._release_fixture_skill(), "released")
+
+        # Post-release: the dispatch still returns the same result with logging
+        # enabled (no behaviour change). The result contract is what we assert
+        # here, not the log.
         with self.assertLogs("capMesh.router", level="INFO"):
             result = self.router.call("cap.search", {"query": "executive brief", "type": "skill"})
         self.assertFalse(result["isError"])

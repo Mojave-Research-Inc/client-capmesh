@@ -9,9 +9,11 @@ circular import between ``risk_policy`` and ``governance``.
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 import unittest
+from pathlib import Path
 
 
 class RiskPolicyModuleTests(unittest.TestCase):
@@ -68,11 +70,25 @@ class RiskPolicyModuleTests(unittest.TestCase):
         self.assertTrue(ok)
 
     def test_no_circular_import(self) -> None:
+        # The subprocess does not inherit pytest's ``pythonpath`` ini setting, so
+        # ``import capmesh...`` fails with ModuleNotFoundError when the suite is
+        # launched from the repository root (the common case) rather than from
+        # ``services/asg-capmesh``. Resolve the package root -- the directory
+        # that holds ``capmesh/`` -- from this test file's location and put it
+        # on PYTHONPATH with cwd set there, so the import is portable regardless
+        # of the pytest invocation directory and without installing the package.
+        pkg_root = Path(__file__).resolve().parent.parent  # services/asg-capmesh/
+        env = os.environ.copy()
+        env["PYTHONPATH"] = os.pathsep.join(
+            part for part in [str(pkg_root), env.get("PYTHONPATH", "")] if part
+        )
         result = subprocess.run(
             [sys.executable, "-c", "import capmesh.risk_policy, capmesh.governance"],
             capture_output=True,
             text=True,
             check=False,
+            cwd=str(pkg_root),
+            env=env,
         )
         self.assertEqual(
             result.returncode,

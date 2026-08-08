@@ -55,7 +55,12 @@ from .models import (
     normalize_path,
 )
 
-SCHEMA_VERSION = 2
+# Published schema version. This MUST equal the head version of the versioned
+# migration runner (capmesh.migrations.REGISTRY[-1][0] after
+# register_builtin_migrations()); readiness rejects a correctly migrated
+# database when the two drift. Migration v3 added the CapGuard quarantine +
+# signed-attestation tables, so the runner advances a fresh DB to 3.
+SCHEMA_VERSION = 3
 DEFAULT_LEXICAL_EMBED_DIMS = 256
 
 # Vault-placement manifest: maps capability target URIs to a durable vault
@@ -1690,6 +1695,24 @@ def _quarantine_new_capabilities(
         # so operators can see re-quarantines on the result surface.
         if record.get("reason") == "pending_scan":
             fresh_for_content += 1
+    # Transaction ownership: apply_vault_placement above mutates governance
+    # state (ensure_org_shared_namespace / ensure_all_users_namespace issue
+    # INSERT OR IGNORE against tenants/stores/namespaces), and Python's
+    # sqlite3 opens an implicit transaction for the first such DML even when
+    # every row already exists. quarantine_capability(commit=True) commits on
+    # the quarantine path, but the idempotent re-ingest path
+    # (existing.get(effective.uri) == effective.content_hash -> ``continue``)
+    # performs the placement provisioning and then skips the quarantine write,
+    # so nothing commits and the implicit transaction stays open. The caller
+    # next issues ``BEGIN IMMEDIATE`` and fails with
+    # "cannot start a transaction within a transaction". This function owns the
+    # transaction it opens: commit any pending write here so the connection is
+    # clean before the caller's write transaction begins. The governance
+    # provisioning is durable immediately, matching the quarantine row's
+    # separate-commit guarantee above; if no write happened, in_transaction is
+    # False and this is a no-op.
+    if con.in_transaction:
+        con.commit()
     return {"quarantined": quarantined, "freshForContent": fresh_for_content}
 
 

@@ -99,6 +99,26 @@ class CapGuardTests(unittest.TestCase):
         self.assertEqual(int(version), 3)
         con.close()
 
+    def test_schema_version_constant_matches_migration_runner_head(self) -> None:
+        # The published SCHEMA_VERSION constant MUST equal the head version the
+        # migration runner advances a fresh database to. readiness rejects a
+        # correctly migrated database when the two drift (CapGuard added
+        # migration v3 but left the constant at 2, so readiness reported
+        # schemaVersion ok=False actual=3 expected=2 and returned 503). Pin the
+        # invariant so the next migration that forgets to bump the constant
+        # fails here instead of in production.
+        from capmesh import index as index_module
+        from capmesh import migrations
+
+        migrations.register_builtin_migrations()
+        runner_head = migrations.REGISTRY[-1][0] if migrations.REGISTRY else 0
+        self.assertEqual(
+            index_module.SCHEMA_VERSION,
+            runner_head,
+            f"SCHEMA_VERSION={index_module.SCHEMA_VERSION} but migration runner head is {runner_head}",
+        )
+        self.assertEqual(index_module.SCHEMA_VERSION, 3)
+
     # -- quarantine store ------------------------------------------------
 
     def test_quarantine_capability_inserts_and_is_idempotent_for_same_content(self) -> None:
