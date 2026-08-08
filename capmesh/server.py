@@ -1492,6 +1492,19 @@ def serve_http(
                 if path == "/api/v1/audit":
                     self.write_json({"items": list_audit_events(con, principal, int(first(query, "limit") or 50))})
                     return
+                if path == "/api/v1/capguard/status":
+                    from .capguard_api import capguard_status
+                    self.write_json(capguard_status(con, principal))
+                    return
+                if path == "/api/v1/capguard/quarantine":
+                    from .capguard_api import capguard_list_quarantine
+                    self.write_json(capguard_list_quarantine(con, principal, status=first(query, "status")))
+                    return
+                if path.startswith("/api/v1/capguard/quarantine/") and path.endswith("/attestations"):
+                    from .capguard_api import capguard_list_attestations
+                    quarantine_id = parsed.path.removeprefix("/api/v1/capguard/quarantine/").removesuffix("/attestations").strip("/")
+                    self.write_json(capguard_list_attestations(con, principal, quarantine_id, attestation_type=first(query, "type")))
+                    return
                 if path == "/api/v1/sync":
                     self.write_json(sync_summary(con, principal))
                     return
@@ -1552,6 +1565,33 @@ def serve_http(
                 return
             except ValueError as exc:
                 self.write_json({"error": {"code": "VALIDATION_ERROR", "message": str(exc)}}, status=HTTPStatus.BAD_REQUEST)
+                return
+            # CapGuard release/reject (fail-closed). These mutate the quarantine
+            # store and require the ``manage`` right. A fail-closed refusal
+            # (QuarantineReleaseBlocked) maps to 409; a bad quarantine id / state
+            # (QuarantineError) maps to 404/400. They live outside the try/except
+            # above so the distinct error codes are handled explicitly.
+            if path == "/api/v1/capguard/release":
+                from .capguard import QuarantineError, QuarantineReleaseBlocked
+                from .capguard_api import capguard_release
+                try:
+                    self.write_json(capguard_release(con, principal, body))
+                except PermissionError as exc:
+                    self.write_json({"error": {"code": "FORBIDDEN", "message": str(exc)}}, status=HTTPStatus.FORBIDDEN)
+                except QuarantineReleaseBlocked as exc:
+                    self.write_json({"error": {"code": "RELEASE_BLOCKED", "message": str(exc)}}, status=HTTPStatus.CONFLICT)
+                except QuarantineError as exc:
+                    self.write_json({"error": {"code": "NOT_FOUND", "message": str(exc)}}, status=HTTPStatus.NOT_FOUND)
+                return
+            if path == "/api/v1/capguard/reject":
+                from .capguard import QuarantineError
+                from .capguard_api import capguard_reject
+                try:
+                    self.write_json(capguard_reject(con, principal, body))
+                except PermissionError as exc:
+                    self.write_json({"error": {"code": "FORBIDDEN", "message": str(exc)}}, status=HTTPStatus.FORBIDDEN)
+                except QuarantineError as exc:
+                    self.write_json({"error": {"code": "NOT_FOUND", "message": str(exc)}}, status=HTTPStatus.NOT_FOUND)
                 return
             # Task management API: list, status, cancel, process
             if path == "/api/v1/tasks":

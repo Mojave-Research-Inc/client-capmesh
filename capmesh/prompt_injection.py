@@ -66,6 +66,19 @@ _INJECTION_PHRASES = (
     "print your system prompt",
     "you are now",
     "act as",
+    "ignore the above",
+    "forget your previous",
+    "forget the above",
+    "new instructions:",
+    "override your instructions",
+    "override the system",
+    "do not follow your rules",
+    "reveal your system prompt",
+    "show your system prompt",
+    "jailbreak",
+    "developer mode",
+    "ignore safety",
+    "bypass your safety",
 )
 
 

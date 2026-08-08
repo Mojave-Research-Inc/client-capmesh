@@ -12,5 +12,48 @@ and cap.report.
 
 from .models import Capability, Principal
 
-__all__ = ["Capability", "Principal"]
+# CapGuard authoritative domain surface — types, policy, and exports. Re-exported
+# here so callers may ``from capmesh import CapGuardPolicy, evaluate_cap_guard_policy``
+# without depending on the internal module path. See ``capmesh/cap_guard.py``.
+from .cap_guard import (
+    CHECK_STATES,
+    DEFAULT_CHECKS,
+    GUARD_ACTIONS,
+    ISOLATION_MODES,
+    QUARANTINE_RECORD_STATUSES,
+    RISK_TIERS,
+    SCAN_OUTCOMES,
+    SEVERITIES,
+    CapGuardCheckResult,
+    CapGuardPolicy,
+    CapGuardVerdict,
+    QuarantineRecord,
+    decide_isolation_mode,
+    default_policy,
+    evaluate_cap_guard_policy,
+    fail_closed_scan,
+    quarantine_required,
+)
+
+__all__ = [
+    "CHECK_STATES",
+    "DEFAULT_CHECKS",
+    "GUARD_ACTIONS",
+    "ISOLATION_MODES",
+    "QUARANTINE_RECORD_STATUSES",
+    "RISK_TIERS",
+    "SCAN_OUTCOMES",
+    "SEVERITIES",
+    "CapGuardCheckResult",
+    "CapGuardPolicy",
+    "CapGuardVerdict",
+    "Capability",
+    "Principal",
+    "QuarantineRecord",
+    "decide_isolation_mode",
+    "default_policy",
+    "evaluate_cap_guard_policy",
+    "fail_closed_scan",
+    "quarantine_required",
+]
 

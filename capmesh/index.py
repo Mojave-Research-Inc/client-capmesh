@@ -434,6 +434,11 @@ def init_db(con: sqlite3.Connection, *, enable_vector: bool = True) -> dict[str,
         """
    )
     init_governance_schema(con)
+    # CapGuard quarantine store + signed attestation tables.  Created here so a
+    # fresh DB always has the quarantine store available for quarantine-before-
+    # indexing; migration v3 also creates them idempotently for upgrading DBs.
+    from .capguard import ensure_quarantine_tables
+    ensure_quarantine_tables(con)
     # Register and run versioned migrations. The migration runner tracks
     # schema_version in the meta table. Each migration is idempotent.
     from .migrations import register_builtin_migrations, run_migrations
@@ -1415,6 +1420,19 @@ def _upsert_discovered(
                 unchanged += 1
             else:
                 updated += 1
+        # A matching active quarantine is a real serving hold, not merely an
+        # audit record. Keep the row in the catalog for operator inspection but
+        # make every normal discover/load/call policy treat it as inactive.
+        held = con.execute(
+            """SELECT 1 FROM capguard_quarantine
+               WHERE tenant_id = ? AND capability_uri = ? AND content_hash = ?
+                 AND status = 'quarantined' LIMIT 1""",
+            (effective.tenant_id or "asg", effective.uri, effective.content_hash),
+        ).fetchone()
+        if held is not None:
+            effective = dataclasses.replace(
+                effective, lifecycle="draft", approval_state="pending"
+            )
         cap_id = upsert_capability(con, effective)
         if vector_enabled and not vector_aborted:
             if _upsert_vector(
@@ -1575,17 +1593,125 @@ def _enforce_install_guards(
     return admitted
 
 
+def _is_system_or_draft(cap: Capability) -> bool:
+    return cap.source_kind in ("system_capability", "capmesh_draft")
+
+
+def _existing_capability_identity(con: sqlite3.Connection) -> dict[str, str]:
+    """URIs already in ``capabilities`` (the set a new discovery must NOT be in).
+
+    Used by the CapGuard quarantine gate to decide which discovered capabilities
+    are genuinely *new* (added) versus a refresh of an already-indexed row, so the
+    gate quarantines only first-time capabilities and never re-holds a previously
+    released one on a no-op re-ingest.
+    """
+    return {
+        str(row["uri"]): str(row["content_hash"])
+        for row in con.execute("SELECT uri, content_hash FROM capabilities").fetchall()
+    }
+
+
+def _quarantine_new_capabilities(
+    con: sqlite3.Connection,
+    capabilities: Iterable[Capability],
+    *,
+    tenant_id: str = "asg",
+) -> dict[str, int]:
+    """Quarantine every genuinely-new capability BEFORE it is indexed.
+
+    CapGuard contract: quarantine-before-indexing. A capability is placed into the
+    per-tenant quarantine store (a signed-attestation-bound row keyed by
+    ``(tenant, uri, content_hash)``) before it is ever written to the live
+    ``capabilities`` table, so an unscanned artifact cannot become callable by
+    bypassing quarantine. The quarantine row is idempotent for identical content
+    (see :func:`capmesh.capguard.quarantine_capability`), so a no-op re-ingest of
+    unchanged content touches nothing.
+
+    Only capabilities that are NOT already in ``capabilities`` (genuinely new) are
+    quarantined here, so a previously-released capability is never re-held on a
+    refresh, and system/draft capabilities (builtins, governance drafts) are
+    excluded — they enter the catalog through their own authoritative paths.
+
+    The quarantine row is keyed by the *effective* (post-placement) URI and
+    content hash, NOT the raw discovered identity, so it matches the row
+    ``_upsert_discovered`` actually writes to ``capabilities``. The placement
+    transform (``apply_vault_placement`` / ``apply_default_user_namespace``) can
+    re-namespace a discovered URI; without mirroring it here the quarantine row
+    would be keyed by a URI that is never indexed, so a re-ingest would
+    re-quarantine forever and the release path could not correlate the
+    quarantine item to the live capability. The placement here is computed
+    identically to ``_upsert_discovered`` so the two agree on identity.
+
+    Runs OUTSIDE the ingest write transaction: the quarantine store is a separate
+    SQLite table with its own commit, so a quarantine row is durable the instant
+    it is recorded, even if the later ``BEGIN IMMEDIATE`` write is rolled back.
+    That ordering is the fail-closed guarantee: a new capability either has a
+    quarantine row before it is indexed, or the ingest does not reach the index.
+    """
+    from .capguard import quarantine_capability
+    from .governance import apply_default_user_namespace, apply_vault_placement
+
+    placement_index = load_vault_placement_index(vault_placement_path())
+    existing = _existing_capability_identity(con)
+    quarantined = 0
+    fresh_for_content = 0
+    for cap in capabilities:
+        if _is_system_or_draft(cap):
+            continue
+        # Mirror _upsert_discovered's placement so the quarantine row is keyed
+        # by the exact URI + content_hash that will be written to capabilities.
+        placed = apply_vault_placement(con, cap, placement_index)
+        effective = placed if placed is not None else apply_default_user_namespace(cap)
+        if existing.get(effective.uri) == effective.content_hash:
+            # An unchanged refresh is idempotent. Changed content is a new
+            # security subject and must obtain fresh scan/release evidence.
+            continue
+        record = quarantine_capability(
+            con,
+            tenant_id=effective.tenant_id or tenant_id,
+            capability_uri=effective.uri,
+            capability_type=effective.capability_type,
+            name=effective.name,
+            version=effective.version,
+            source_path=effective.source_path,
+            content_hash=effective.content_hash,
+            reason="pending_scan",
+            submitted_by=effective.submitted_by or effective.created_by or "ingest@capmesh",
+            metadata={
+                "discoveredSourceSystem": cap.source_system,
+                "discoveredSourceKind": cap.source_kind,
+                "effectiveUri": effective.uri,
+            },
+            commit=True,
+        )
+        quarantined += 1
+        # A changed content_hash for an existing URI opens a fresh quarantine
+        # row (the store's active-quarantine unique index allows it). Track it
+        # so operators can see re-quarantines on the result surface.
+        if record.get("reason") == "pending_scan":
+            fresh_for_content += 1
+    return {"quarantined": quarantined, "freshForContent": fresh_for_content}
+
+
 def ingest_index(
     db_path: str | Path,
     roots: Iterable[str | Path],
     *,
     enable_vector: bool = True,
     post_ingest: Callable[[sqlite3.Connection], dict[str, Any]] | None = None,
+    quarantine_new: bool = True,
 ) -> dict[str, Any]:
     """Add or refresh capabilities discovered under *roots* without deleting others.
 
     This is the only behavior exposed by ``capmesh ingest``.  A narrow root has a
     narrow write scope, which makes the July 17 2110->16 failure mode impossible.
+
+    Every genuinely-new discovered
+    capability is recorded in the CapGuard quarantine store BEFORE it is indexed,
+    so no unscanned artifact can become callable by bypassing the gate. The
+    quarantine row is the fail-closed anchor for the signed scan/release
+    attestation chain; the capability stays ``quarantined`` until an explicit,
+    evidence-bound release (see :mod:`capmesh.capguard`).
     """
 
     roots = tuple(roots)
@@ -1625,6 +1751,37 @@ def ingest_index(
             0,
             "error",
             str(exc),
+            operation="ingest",
+            discovered=len(capabilities),
+            removed=0,
+        )
+        raise
+    # CapGuard quarantine-before-indexing (CM-CapGuard). Run AFTER admission
+    # guards (so a refused capability is not quarantined) and BEFORE the write
+    # transaction opens (so the quarantine row is durable before the capability
+    # is ever written to `capabilities`). A new capability either has a
+    # quarantine row before it is indexed, or the ingest does not reach the
+    # index — there is no path that writes a new row to `capabilities` without a
+    # corresponding `capguard_quarantine` row. See `_quarantine_new_capabilities`.
+    # ``quarantine_new`` is retained only as a source-compatibility argument.
+    # It can no longer disable the security boundary: callers cannot opt user
+    # uploads out of CapGuard.
+    capguard_quarantine: dict[str, int] = {"quarantined": 0, "freshForContent": 0}
+    try:
+        capguard_quarantine = _quarantine_new_capabilities(con, capabilities)
+    except Exception as exc:
+        # A quarantine-store failure is fail-closed: do NOT proceed to index
+        # capabilities that may not have a quarantine row. Close the handle
+        # and surface the error exactly like an admission-guard failure.
+        con.close()
+        write_ingest_audit_log(
+            db_path,
+            roots,
+            False,
+            0,
+            0,
+            "error",
+            f"capguard quarantine failed: {exc}",
             operation="ingest",
             discovered=len(capabilities),
             removed=0,
@@ -1845,6 +2002,11 @@ def ingest_index(
         "discoveredSources": coverage["discoveredSources"],
         "coverageOk": coverage["coverageOk"],
         "missingSources": coverage["missingSources"],
+        "capGuard": {
+            "quarantineEnabled": True,
+            "quarantined": capguard_quarantine.get("quarantined", 0),
+            "freshForContent": capguard_quarantine.get("freshForContent", 0),
+        },
         "vector": (
             # Coverage counts ride along on EVERY run, not only failing ones.
             # A run that wrote 179 of 3,479 vectors previously reported a bare
@@ -1989,6 +2151,29 @@ def stage_rebuild_index(
     approved = _approved_removal_uris(approved_removals)
     con = connect(candidate)
     status = init_db(con, enable_vector=enable_vector)
+    # A staged rebuild is an ingestion path too.  Quarantine new capabilities
+    # while the candidate still contains the live catalog snapshot, so the
+    # new-vs-existing comparison is accurate and the quarantine records travel
+    # with the candidate if it is promoted.  Failure is deliberately fatal:
+    # no candidate containing an unscanned new capability may be produced.
+    try:
+        capguard_quarantine = _quarantine_new_capabilities(con, capabilities)
+    except Exception as exc:
+        con.close()
+        candidate.unlink(missing_ok=True)
+        write_ingest_audit_log(
+            db,
+            roots,
+            True,
+            before,
+            before,
+            "error",
+            f"capguard quarantine failed: {exc}",
+            operation="rebuild.stage",
+            discovered=len(capabilities),
+            removed=0,
+        )
+        raise
     try:
         con.execute("BEGIN IMMEDIATE")
         drafts = [
@@ -2076,6 +2261,10 @@ def stage_rebuild_index(
         "removed": len(removed_uris),
         "approvedRemovals": sorted(removed_uris),
         "unusedRemovalApprovals": [],
+        "capguard": {
+            "quarantined": capguard_quarantine.get("quarantined", 0),
+            "freshForContent": capguard_quarantine.get("freshForContent", 0),
+        },
         "validation": validation,
         "vector": status["vector"],
         "sqlite": status["sqlite"],
@@ -2169,7 +2358,30 @@ def get_capability(con: sqlite3.Connection, uri_or_name: str) -> Capability | No
             "SELECT * FROM capabilities WHERE name = ? OR title = ? ORDER BY source_system = 'asg-os.plugins' DESC LIMIT 1",
             (uri_or_name, uri_or_name),
         ).fetchone()
-    return capability_from_row(row) if row else None
+    if row is None:
+        return None
+    cap = capability_from_row(row)
+    return None if _capguard_is_held(con, cap) else cap
+
+
+def _capguard_is_held(con: sqlite3.Connection, capability: Capability) -> bool:
+    """Return whether this exact tenant/URI/content version remains quarantined."""
+    try:
+        row = con.execute(
+            """SELECT 1 FROM capguard_quarantine
+               WHERE tenant_id = ? AND capability_uri = ? AND content_hash = ?
+                 AND status = 'quarantined' LIMIT 1""",
+            (
+                capability.tenant_id or "asg",
+                capability.uri,
+                capability.content_hash,
+            ),
+        ).fetchone()
+    except sqlite3.OperationalError:
+        # Pre-migration databases are upgraded by init_db; until then, fail
+        # closed only when the table exists rather than breaking diagnostics.
+        return False
+    return row is not None
 
 
 def list_capabilities(
@@ -2199,6 +2411,8 @@ def list_capabilities(
     items = []
     for row in rows[:page_size]:
         cap = capability_from_row(row)
+        if _capguard_is_held(con, cap):
+            continue
         visible, locked = can_discover(cap, principal, con=con, audit=False)
         if visible:
             items.append(cap.to_record(stub=locked, include_paths=False))
@@ -2309,6 +2523,8 @@ def search(con: sqlite3.Connection, query: str, principal: Principal, *, k: int 
     for uri, parts in ranks.items():
         cap = cap_map.get(uri)
         if cap is None:
+            continue
+        if _capguard_is_held(con, cap):
             continue
         visible, locked = can_discover(cap, principal, con=con, audit=False)
         if not visible:

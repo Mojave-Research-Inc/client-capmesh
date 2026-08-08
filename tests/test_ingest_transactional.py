@@ -492,7 +492,7 @@ class TransactionalIngestTests(unittest.TestCase):
 
         self.assertEqual(self.live_count(), 0)
 
-    def test_cli_superadmin_install_approves_immediately_with_audit_identity(self) -> None:
+    def test_cli_superadmin_install_cannot_bypass_capguard(self) -> None:
         output = io.StringIO()
         export_path = self.root / "catalog.jsonl"
         with mock.patch.dict(
@@ -519,7 +519,8 @@ class TransactionalIngestTests(unittest.TestCase):
             )
 
         result = json.loads(output.getvalue())
-        self.assertTrue(result["postIngest"]["catalogApproved"])
+        self.assertFalse(result["postIngest"]["catalogApproved"])
+        self.assertGreater(result["postIngest"]["deferredForCapGuard"], 0)
         self.assertEqual(result["postIngest"]["actor"], "test-user@example.com")
         con = connect(self.db)
         try:
@@ -538,8 +539,8 @@ class TransactionalIngestTests(unittest.TestCase):
             }
         finally:
             con.close()
-        self.assertEqual(pending, 0)
-        self.assertEqual(actors, {"test-user@example.com"})
+        self.assertGreater(pending, 0)
+        self.assertEqual(actors, set())
 
     def test_cli_ingest_is_refused_on_nonvoting_member_with_authoritative_node_target(self) -> None:
         output = io.StringIO()

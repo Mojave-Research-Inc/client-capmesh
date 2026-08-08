@@ -109,3 +109,8 @@ def register_builtin_migrations() -> None:
             "reason TEXT NOT NULL, granted_by TEXT NOT NULL, expires_at TEXT NOT NULL, "
             "revoked_at TEXT, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)"
         )
+
+    @migration(3, "Add CapGuard quarantine and signed-attestation tables")
+    def _v3(con: sqlite3.Connection) -> None:
+        from .capguard import ensure_quarantine_tables
+        ensure_quarantine_tables(con)

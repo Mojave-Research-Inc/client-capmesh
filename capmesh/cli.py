@@ -398,6 +398,22 @@ def main(argv: list[str] | None = None) -> None:
 
         def apply_install_policy(con: Any) -> dict[str, Any]:
             assert auto_approval_actor is not None
+            held = int(
+                con.execute(
+                    "SELECT COUNT(*) FROM capguard_quarantine WHERE status='quarantined'"
+                ).fetchone()[0]
+            )
+            if held:
+                # Superadmin convenience may approve governance gates, but it
+                # must never bypass CapGuard's independent scan/release gate.
+                return {
+                    "policy": "capguard-release-required",
+                    "actor": auto_approval_actor,
+                    "catalogApproved": False,
+                    "deferredForCapGuard": held,
+                    "failed": 0,
+                    "remainingNonCompliant": held,
+                }
             approval = approve_catalog(
                 con,
                 Principal(subject=auto_approval_actor, tenant_id=DEFAULT_TENANT, roles=("org_admin",)),
